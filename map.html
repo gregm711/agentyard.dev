@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>瑞金广告同行地图 · 百闻广告</title>
+<meta name="description" content="瑞金市象湖镇/城区本地广告公司分布示意图，含百闻广告（本案）与精盛信、京都、金桥、巨圣、光大、成鑫、乐享、冠华等真实同行。" />
+<style>
+:root{--bg:#0b0d12;--surface:#161a24;--line:#262c3a;--text:#eef1f6;--muted:#9aa3b2;--gold-1:#ffd277;--gold-2:#ff8a1e;--peer:#5b6b86}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:"PingFang SC","Microsoft YaHei","Hiragino Sans GB",system-ui,sans-serif;line-height:1.6}
+a{color:var(--gold-1);text-decoration:none}
+.wrap{max-width:1080px;margin:0 auto;padding:30px 20px 60px}
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:8px}
+.back{font-size:14px;color:var(--muted)}
+h1{font-size:clamp(24px,3.4vw,34px);font-weight:900}
+h1 .glow{color:var(--gold-1);text-shadow:0 0 18px rgba(255,180,70,.6)}
+.sub{color:var(--muted);font-size:14px;margin:6px 0 22px}
+.map-card{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:14px;overflow:hidden}
+svg{width:100%;height:auto;display:block;background:
+  radial-gradient(700px 360px at 50% 30%,rgba(255,170,60,.10),transparent 60%),#0e1219;border-radius:12px}
+.legend{display:flex;gap:22px;flex-wrap:wrap;margin:16px 4px 0;font-size:13px;color:var(--muted)}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:50%;margin-right:6px;vertical-align:middle}
+.lg-self{background:linear-gradient(135deg,var(--gold-1),var(--gold-2))}
+.lg-peer{background:var(--peer)}
+.note{margin-top:14px;font-size:12.5px;color:var(--muted);border-left:3px solid var(--gold-2);padding-left:12px}
+.list{margin-top:30px}
+.list h2{font-size:20px;margin-bottom:14px}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th,td{text-align:left;padding:12px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{color:var(--gold-1);font-weight:700;font-size:13px}
+td .no{display:inline-block;width:22px;height:22px;line-height:22px;text-align:center;border-radius:50%;background:var(--peer);color:#fff;font-size:12px;margin-right:8px}
+td b{color:#eef1f6}
+.muted{color:var(--muted)}
+.tag{display:inline-block;font-size:12px;color:var(--gold-1);border:1px solid var(--line);border-radius:999px;padding:2px 9px;margin:2px 4px 2px 0}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar">
+    <h1>瑞金广告<span class="glow">同行地图</span></h1>
+    <a class="back" href="index.html">← 返回百闻广告官网</a>
+  </div>
+  <p class="sub">瑞金市 · 象湖镇 / 城区本地广告公司分布示意图 —— 看清竞争格局，方便客户比选。</p>
+
+  <div class="map-card">
+    <svg viewBox="0 0 760 560" role="img" aria-label="瑞金广告同行分布示意图">
+      <!-- 街区底纹 -->
+      <defs>
+        <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+          <path d="M40 0H0V40" fill="none" stroke="#1b2230" stroke-width="1"/>
+        </pattern>
+      </defs>
+      <rect x="0" y="0" width="760" height="560" fill="url(#grid)"/>
+      <!-- 绵江 -->
+      <path d="M-20 70 C 180 160, 240 300, 360 360 S 640 500, 800 520"
+            fill="none" stroke="#1d4e6b" stroke-width="26" stroke-linecap="round" opacity=".55"/>
+      <path d="M-20 70 C 180 160, 240 300, 360 360 S 640 500, 800 520"
+            fill="none" stroke="#2b6f96" stroke-width="10" stroke-linecap="round" opacity=".5"/>
+      <!-- 主路 -->
+      <line x1="60" y1="120" x2="700" y2="120" stroke="#222b3a" stroke-width="6"/>
+      <line x1="380" y1="40" x2="380" y2="520" stroke="#222b3a" stroke-width="6"/>
+      <line x1="120" y1="500" x2="680" y2="160" stroke="#222b3a" stroke-width="5" opacity=".7"/>
+      <!-- 区域标注 -->
+      <text x="30" y="40" fill="#5b6b86" font-size="15" font-weight="700">瑞金市 · 象湖镇 / 城区</text>
+      <text x="560" y="300" fill="#2b6f96" font-size="13" transform="rotate(18 560 300)">绵江</text>
+
+      <!-- 标记由脚本注入 -->
+      <g id="markers"></g>
+    </svg>
+  </div>
+
+  <div class="legend">
+    <span><i class="lg-self"></i>百闻广告（本案）</span>
+    <span><i class="lg-peer"></i>本地同行（真实企业，按公开地址所属街区相对摆放）</span>
+  </div>
+  <p class="note">※ 地图为<strong>相对示意</strong>，位置依据公开工商/黄页地址所属街区大致摆放，非精确 GPS 坐标，仅供格局参考。同行信息来自公开企业名录（顺企网、爱企查、水滴信用等），如需商务合作请以各企业官方渠道为准。</p>
+
+  <div class="list">
+    <h2>本地同行明细（真实公开信息）</h2>
+    <table>
+      <thead><tr><th style="width:30%">企业</th><th style="width:30%">地址（公开）</th><th style="width:18%">电话</th><th>主营 / 成立</th></tr></thead>
+      <tbody id="rows"></tbody>
+    </table>
+  </div>
+</div>
+
+<script>
+(function(){
+  var peers = [
+    {n:"瑞金市精盛信广告制作部", addr:"向阳北路17号", tel:"13979792295", main:"发光字 / 标识牌 / 亮化工程", year:"2016"},
+    {n:"瑞金市京都广告装饰有限公司", addr:"凯丽商业街11栋1106号", tel:"0797-2539985", main:"亮化 / 户外广告 / 门头字牌", year:"2008"},
+    {n:"瑞金市金桥广告策划装饰有限公司", addr:"象湖镇绵水村谢屋", tel:"0797-2523836", main:"户外广告 / 招牌 / 庆典策划", year:"2010"},
+    {n:"瑞金市巨圣广告有限公司", addr:"象湖镇锦江名城乐水园", tel:"15970143997", main:"广告设计制作发布 / 招牌路牌灯箱", year:"2016"},
+    {n:"瑞金市光大广告传媒有限公司", addr:"绵江北路锦江名城峰景二期", tel:"公开未列", main:"标识标牌 / 广告设计 / 亮化", year:"2011"},
+    {n:"瑞金市象湖镇成鑫广告制作部", addr:"金都大道西延路顺丰速运旁", tel:"公开未列", main:"广告设计 / 制作 / 礼品", year:"2019"},
+    {n:"瑞金乐享广告制作有限公司", addr:"赣闽商贸物流园二期", tel:"公开未列", main:"广告制作 / 设计 / 代理", year:"2021"},
+    {n:"江西省冠华广告制作有限公司", addr:"溪背村城南市场西边107号", tel:"公开未列", main:"包装装潢印刷 / 广告", year:"2020"}
+  ];
+  // 相对坐标（viewBox 760x560），按所属街区大致摆放
+  var pos = [[300,150],[470,230],[560,360],[330,330],[250,300],[170,250],[600,450],[430,460]];
+
+  var SVGNS="http://www.w3.org/2000/svg";
+  var g=document.getElementById("markers");
+  // 本案（百闻）
+  function circle(cx,cy,r,fill,glow){
+    var c=document.createElementNS(SVGNS,"circle");
+    c.setAttribute("cx",cx);c.setAttribute("cy",cy);c.setAttribute("r",r);
+    c.setAttribute("fill",fill);
+    if(glow) c.setAttribute("filter","drop-shadow(0 0 8px rgba(255,170,60,.8))");
+    return c;
+  }
+  function label(x,y,t,fill,weight){
+    var t1=document.createElementNS(SVGNS,"text");
+    t1.setAttribute("x",x);t1.setAttribute("y",y);t1.setAttribute("fill",fill);
+    t1.setAttribute("font-size","13");t1.setAttribute("font-weight",weight||"700");
+    t1.setAttribute("text-anchor","middle");t1.textContent=t;return t1;
+  }
+  // 本案（百闻广告）
+  var selfC=document.createElementNS(SVGNS,"circle");
+  selfC.setAttribute("cx",380);selfC.setAttribute("cy",280);selfC.setAttribute("r",15);
+  selfC.setAttribute("fill","#ff8a1e");
+  selfC.setAttribute("filter","drop-shadow(0 0 8px rgba(255,170,60,.8))");
+  g.appendChild(selfC);
+  g.appendChild(label(380,284,"百","#fff",900));
+  g.appendChild(label(380,308,"百闻·本案","#ffd277",800));
+
+  peers.forEach(function(p,i){
+    var x=pos[i][0], y=pos[i][1];
+    g.appendChild(circle(x,y,11,"#5b6b86",0));
+    g.appendChild(label(x,y+4,String(i+1),"#fff",800));
+    g.appendChild(label(x,y-16,(i+1)+". "+p.n.slice(0,6),"#cdd5e2",700));
+  });
+
+  // 表格
+  var rows=document.getElementById("rows");
+  peers.forEach(function(p,i){
+    var tr=document.createElement("tr");
+    tr.innerHTML='<td><span class="no">'+(i+1)+'</span><b>'+p.n+'</b></td>'+
+      '<td class="muted">'+p.addr+'</td>'+
+      '<td class="muted">'+p.tel+'</td>'+
+      '<td><span class="tag">'+p.main+'</span><br><span class="muted">成立 '+p.year+'</span></td>';
+    rows.appendChild(tr);
+  });
+})();
+</script>
+</body>
+</html>
