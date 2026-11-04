@@ -34,4 +34,4 @@ Allow: /
 # AI 可读信息文件
 Allow: /llms.txt
 
-Sitemap: https://jxcm-army-1416745828.cos.ap-guangzhou.myqcloud.com/baiwen/sitemap.xml
+Sitemap: http://122.152.250.27/sitemap.xml
