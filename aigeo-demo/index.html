@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>杰轩烟酒 · 品牌 GEO 可见度诊断报告（2026-11-07）</title>
+<style>
+  :root{--bg:#0f1420;--card:#171e2e;--line:#26314a;--fg:#e6edf7;--mut:#93a2bd;--acc:#4da3ff;--ok:#2ecc71;--warn:#f5a623;--bad:#ff5d5d;}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.7 -apple-system,"Segoe UI","Microsoft YaHei",sans-serif}
+  .wrap{max-width:1080px;margin:0 auto;padding:32px 20px 64px}
+  h1{font-size:26px;margin:0 0 6px}
+  h2{font-size:19px;margin:34px 0 12px;padding-left:10px;border-left:4px solid var(--acc)}
+  .sub{color:var(--mut);font-size:13px;margin-bottom:22px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:14px 0}
+  table{width:100%;border-collapse:collapse;font-size:14px;margin:10px 0}
+  th,td{padding:9px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+  th{color:var(--mut);font-weight:600;background:#141b29}
+  .score{display:flex;gap:16px;flex-wrap:wrap;margin:16px 0}
+  .kpi{flex:1 1 180px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px}
+  .kpi b{display:block;font-size:30px;line-height:1.2}
+  .kpi small{color:var(--mut)}
+  .tag{display:inline-block;padding:1px 8px;border-radius:999px;font-size:12px;border:1px solid}
+  .t-ok{color:var(--ok);border-color:var(--ok)}
+  .t-warn{color:var(--warn);border-color:var(--warn)}
+  .t-bad{color:var(--bad);border-color:var(--bad)}
+  .t-mut{color:var(--mut);border-color:var(--line)}
+  .big{font-size:40px;font-weight:700}
+  .bad-c{color:var(--bad)}
+  ul{padding-left:20px}li{margin:6px 0}
+  .foot{margin-top:36px;color:var(--mut);font-size:12.5px;border-top:1px solid var(--line);padding-top:14px}
+  code{background:#0b101a;padding:1px 6px;border-radius:5px;font-size:13px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>杰轩烟酒 · 品牌 GEO 可见度诊断报告</h1>
+  <div class="sub">诊断日期 2026-11-07 ｜ 方法：geo-brand-visibility（4 维 AIVO）+ 真实 Web 检索取证 ｜ 数据性质：真实检索结果，未做虚拟推算</div>
+
+  <div class="card">
+    <b>一句话结论</b>：<span class="bad-c big">37.5 / 100</span>
+    <span class="tag t-bad">较差（&lt;60）</span>
+    <p style="margin:10px 0 0">
+      最致命的问题不是"没内容"，而是<b>品牌实体被混淆</b>——检索「杰轩烟酒」命中的是<b>山东临沂兰山区</b>的「杰轩烟酒商行」（腾讯地图收录，评分 4.2，电话 130****9491），
+      与华总在<b>南康</b>的经营主体并非同一家。AI 回答会把两者混为一谈，导致：① 外地客户被导错；② 本地客户搜不到你；③ 后续所有内容投放都建立在错误的实体锚点上，越投入越偏。
+    </p>
+  </div>
+
+  <h2>AIVO 四维评分（等权重 25%）</h2>
+  <div class="score">
+    <div class="kpi"><small>AI 搜索可见性</small><b class="bad-c">25</b><small>实体混淆，AI 无法准确识别</small></div>
+    <div class="kpi"><small>基建完善度</small><b class="bad-c">30</b><small>未检索到官网/结构化信息</small></div>
+    <div class="kpi"><small>竞争优势</small><b style="color:var(--warn)">55</b><small>价格极强，专业认知弱</small></div>
+    <div class="kpi"><small>舆情健康度</small><b class="bad-c">40</b><small>无负面，也无正面资产</small></div>
+  </div>
+  <div class="card" style="font-size:14px;color:var(--mut)">
+    加权：25×0.25 + 30×0.25 + 55×0.25 + 40×0.25 = <b style="color:var(--fg)">37.5</b>。评分口径为人工规则打分，依据下表逐条证据，非模型臆测。
+  </div>
+
+  <h2>① 真实检索证据（可复核）</h2>
+  <table>
+    <tr><th style="width:32%">检索项</th><th style="width:38%">命中结果</th><th>判定</th></tr>
+    <tr>
+      <td>「杰轩烟酒 南康 白酒 门店」</td>
+      <td>腾讯地图返回<b>山东临沂兰山区银雀山街道开源路113号</b>「杰轩烟酒商行」，评分 4.2、营业 09:30–20:00</td>
+      <td><span class="tag t-bad">实体错配</span> AI 会把外地同名店当作你</td>
+    </tr>
+    <tr>
+      <td>南康本地酒类企业名录</td>
+      <td>顺企网列出南康数十家酒业商行（毅豪达、曹帝、森兴、金尊世家…），<b>未见「杰轩烟酒」</b></td>
+      <td><span class="tag t-bad">本地缺位</span> 产业带名录无你的条目</td>
+    </tr>
+    <tr>
+      <td>「南康家具 白酒 私域 团购 推荐」</td>
+      <td>被 <b>江西鲸荣科技</b>（服务 2W+ 企业、讯飞/火山生态）软文占满前 5 席</td>
+      <td><span class="tag t-warn">赛道被占</span> AI 语料已被竞品垄断</td>
+    </tr>
+    <tr>
+      <td>「南康 GEO 推广 报价」</td>
+      <td><b>江西千盛科技</b>年费档：12,800 / 19,800 / 29,800 / 59,800 元；行业版 39,800 元。第三方测评：基础 9,800 起、B2B 家具 2–3.5 万、全链路 3.5–5 万</td>
+      <td><span class="tag t-ok">定价锚点</span> 见第三节</td>
+    </tr>
+    <tr>
+      <td>自有站点 / llms.txt / sitemap</td>
+      <td>本轮检索<b>未检出</b>杰轩自有可抓取页面（非证实不存在，需自查）</td>
+      <td><span class="tag t-mut">待自查</span> 不作定论</td>
+    </tr>
+  </table>
+  <p style="color:var(--mut);font-size:13px">证据来源：腾讯地图收录页、顺企网赣州南康酒类名录、八方资源网 / 大众艺术网 / 企业家日报网 / 查生意 / 义乌网 / 品牌排行网 相关页面（检索时间 2026-11-07）。凡未检出一律标"未检出"，不写成"不存在"。</p>
+
+  <h2>② 三个致命缺口</h2>
+  <div class="card">
+    <b>缺口 1 · 实体消歧（P0，最优先）</b>
+    <ul>
+      <li>AI 眼里只有"杰轩烟酒=山东临沂那家"。这是<b>一票否决级</b>问题——不解决，任何关键词布局都在给外地店引流。</li>
+      <li>动作：① 统一实体名（如「杰轩烟酒（南康店）」并全渠道一致）；② 在高权重可抓取页面固化 名称+地址+电话+营业时间+经营范围 五要素；③ 用结构化数据标记 LocalBusiness。</li>
+    </ul>
+  </div>
+  <div class="card">
+    <b>缺口 2 · 本地产业带语料缺位（P0）</b>
+    <ul>
+      <li>南康酒类名录里没有你，而 AI 回答南康本地问题时高度依赖这类名录与产业带内容。</li>
+      <li>动作：进顺企网 / 本地商会名录；围绕「南康家具老板送礼」「工程用酒」「宴席团购」做场景化问答页。</li>
+    </ul>
+  </div>
+  <div class="card">
+    <b>缺口 3 · 竞争赛道已被专业玩家占满（P1）</b>
+    <ul>
+      <li>鲸荣、千盛已用软文矩阵把"南康家具 GEO"这一问句的答案位占满，硬碰需要预算。</li>
+      <li>动作：不打正面，走<b>细分问句</b>——「南康烟酒商行哪家能开票」「南康宴席用酒团购」「南康家具厂招待用酒」。长尾问句竞品没铺，是低成本切入口。</li>
+    </ul>
+  </div>
+
+  <h2>③ ¥398 定价的真相（本轮最有价值发现）</h2>
+  <table>
+    <tr><th>对比项</th><th>竞品（千盛/鲸荣）</th><th>杰轩现行</th><th>结论</th></tr>
+    <tr><td>入门年费</td><td>12,800 元/年起（9,800 起为第三方测评最低）</td><td>398 元</td><td>约为竞品 <b>1/25 ~ 1/32</b></td></tr>
+    <tr><td>主力档</td><td>19,800 – 29,800 元/年</td><td>1,280 / 2,980 元</td><td>差 10 倍量级</td></tr>
+    <tr><td>深度运营</td><td>59,800 元/年</td><td>—</td><td>空白档</td></tr>
+    <tr><td>交付形态</td><td>全托管年度运营 + 月报 + 专属对接</td><td>诊断报告/单点服务</td><td><b>不是同一品类</b></td></tr>
+  </table>
+  <div class="card">
+    <b>战略建议（两选一，别混着卖）</b>
+    <ul>
+      <li><b>路线 A · 廉价引流款</b>：¥398 明确写成「单次 AI 可见度体检 + 30 天复测」，不承诺排名、不承诺收录。作用是筛客，成交靠升级 ¥2,980（季度陪跑）→ 对标竞品 12,800 仍便宜 4 倍，价格叙事顺。</li>
+      <li><b>路线 B · 垂直细分款</b>：只卖「南康本地商家 GEO」，用"本地门店 + 可开票 + 可上门"打竞品远程交付的软肋。定价可拉到 1,980–3,980/年，仍显著低于 12,800。</li>
+    </ul>
+    <p style="margin:8px 0 0;color:var(--mut);font-size:13.5px">
+      ⚠️ 风险提示：¥398 若对外宣称"AI 排名优化"会直接撞上竞品 12,800 的专业叙事，客户第一反应是"这么便宜肯定没效果"。改口径为"体检/诊断"可规避。
+    </p>
+  </div>
+
+  <h2>④ 30 天执行清单（按投入产出排序）</h2>
+  <table>
+    <tr><th style="width:8%">优先</th><th style="width:30%">动作</th><th style="width:34%">验收标准</th><th>成本</th></tr>
+    <tr><td><span class="tag t-bad">P0</span></td><td>实体消歧：统一名称+五要素，建 1 个可抓取落地页</td><td>搜「杰轩烟酒 南康」首屏出现正确门店信息</td><td>0 元（自建）</td></tr>
+    <tr><td><span class="tag t-bad">P0</span></td><td>进南康酒类企业名录（顺企网等）+ 本地商会</td><td>名录页可检索到条目</td><td>0 元</td></tr>
+    <tr><td><span class="tag t-warn">P1</span></td><td>3 组细分问句内容（开票/宴席/招待）</td><td>每组 1 篇可抓取问答页 + 结构化数据</td><td>0 元（自有模型生产）</td></tr>
+    <tr><td><span class="tag t-warn">P1</span></td><td>llms.txt + sitemap + LocalBusiness 结构化</td><td>机器可读三件套可访问</td><td>0 元</td></tr>
+    <tr><td><span class="tag t-mut">P2</span></td><td>固定 12 问句集，8 平台月度复测</td><td>形成趋势表（不做单次断言）</td><td>0 元（本地引擎）</td></tr>
+  </table>
+
+  <h2>⑤ 诚实边界（本报告不做什么）</h2>
+  <ul>
+    <li>不承诺任何 AI 平台的引用或排名——不同平台与时间结果会变。</li>
+    <li>"未检出官网/llms.txt"仅代表本轮检索未命中，<b>不等于不存在</b>，需自知自查。</li>
+    <li>AIVO 分数为规则打分（依据上表证据），非模型黑箱输出。</li>
+    <li>竞品报价来自其公开软文与第三方测评页，属"公开口径"，非官方报价单。</li>
+  </ul>
+
+  <div class="foot">
+    生成：杰轩传媒统一工作后台 · 技能链 geo-brand-visibility（诊断流程）+ WebSearch（真实取证）｜ 本机 8000 网关在线（19 模型）供后续内容生产 ｜ 报告为单次快照，复测请固定问句集对比趋势。
+  </div>
+</div>
+</body>
+</html>
