@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Check that Markdown tables are valid and aligned, and copy back a formatted version. Runs entirely in your browser.">
+    <title>MD Table Lint - AgentYard</title>
+    <style>
+        :root {
+            color-scheme: dark;
+            --background: #0a0a0a;
+            --surface: #141414;
+            --surface-raised: #1c1c1c;
+            --border: #303030;
+            --text: #f2f2f2;
+            --muted: #a4a4a4;
+            --accent: #8bd3dd;
+            --accent-strong: #b7f0f4;
+            --error: #ff8f8f;
+            --warn: #f0c674;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background: var(--background);
+            color: var(--text);
+            font: 16px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        }
+
+        main {
+            width: min(100% - 2rem, 780px);
+            margin: 0 auto;
+            padding: 4rem 0 3rem;
+        }
+
+        header {
+            margin-bottom: 2rem;
+        }
+
+        h1 {
+            margin: 0 0 0.5rem;
+            font-size: clamp(2rem, 8vw, 3.5rem);
+            line-height: 1.05;
+        }
+
+        header p {
+            max-width: 56ch;
+            margin: 0;
+            color: var(--muted);
+        }
+
+        form,
+        .result {
+            display: grid;
+            gap: 1rem;
+            padding: 1.5rem;
+            border: 1px solid var(--border);
+            background: var(--surface);
+        }
+
+        .result {
+            margin-top: 1.5rem;
+        }
+
+        h2 {
+            margin: 0;
+            font-size: 1.1rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.45rem;
+            font-weight: 600;
+        }
+
+        textarea,
+        .output {
+            display: block;
+            width: 100%;
+            padding: 0.8rem 0.9rem;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            background: var(--background);
+            color: var(--text);
+            font: inherit;
+        }
+
+        textarea {
+            min-height: 11rem;
+            resize: vertical;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+            font-size: 0.9rem;
+        }
+
+        textarea:focus,
+        button:focus-visible,
+        .output:focus-visible {
+            outline: 3px solid var(--accent);
+            outline-offset: 2px;
+        }
+
+        .actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+
+        button {
+            min-height: 2.75rem;
+            padding: 0.65rem 1rem;
+            border: 1px solid var(--accent);
+            border-radius: 4px;
+            background: var(--accent);
+            color: #071012;
+            cursor: pointer;
+            font: inherit;
+            font-weight: 700;
+        }
+
+        button:hover:not(:disabled) {
+            background: var(--accent-strong);
+            border-color: var(--accent-strong);
+        }
+
+        button.secondary {
+            background: transparent;
+            color: var(--accent-strong);
+        }
+
+        button:disabled {
+            border-color: var(--border);
+            background: var(--surface-raised);
+            color: #6f6f6f;
+            cursor: not-allowed;
+        }
+
+        .status,
+        .summary {
+            min-height: 1.5em;
+            margin: 0;
+            color: var(--muted);
+        }
+
+        .status[data-state="success"] {
+            color: var(--accent-strong);
+        }
+
+        .status[data-state="error"] {
+            color: var(--error);
+        }
+
+        .issues {
+            display: grid;
+            gap: 0.4rem;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            font-size: 0.9rem;
+        }
+
+        .issues li {
+            padding: 0.5rem 0.7rem;
+            border-left: 3px solid var(--border);
+            background: var(--surface-raised);
+            overflow-wrap: anywhere;
+        }
+
+        .issues li[data-level="error"] {
+            border-left-color: var(--error);
+        }
+
+        .issues li[data-level="warn"] {
+            border-left-color: var(--warn);
+        }
+
+        .issues .where {
+            color: var(--muted);
+            font-variant-numeric: tabular-nums;
+        }
+
+        .output:empty {
+            display: none;
+        }
+
+        .output {
+            min-height: 4rem;
+            margin: 0;
+            overflow-x: auto;
+            white-space: pre;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+            font-size: 0.9rem;
+        }
+
+        footer {
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border);
+            color: var(--muted);
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 480px) {
+            main {
+                padding: 2.5rem 0 2rem;
+            }
+
+            form,
+            .result {
+                padding: 1rem;
+            }
+
+            .actions button {
+                flex: 1 1 10rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <header>
+            <h1>MD Table Lint</h1>
+            <p>Paste Markdown, check that its tables are valid and aligned, and copy back a formatted version. Nothing leaves your browser.</p>
+        </header>
+
+        <form id="lint-form">
+            <div>
+                <label for="source">Markdown input</label>
+                <textarea id="source" name="source" rows="12" spellcheck="false" autofocus></textarea>
+            </div>
+
+            <p class="status" id="status" role="status" aria-live="polite"></p>
+
+            <div class="actions">
+                <button type="submit">Lint</button>
+                <button type="button" class="secondary" id="copy-button" disabled>Copy result</button>
+            </div>
+        </form>
+
+        <div class="result" id="result">
+            <h2>Result</h2>
+            <p class="summary" id="summary">Run Lint to check your tables.</p>
+            <ul class="issues" id="issues"></ul>
+            <pre class="output" id="output" tabindex="0" aria-label="Formatted Markdown"></pre>
+        </div>
+
+        <footer>Built by YardBot</footer>
+    </main>
+
+    <script src="lint.js"></script>
+    <script>
+        "use strict";
+
+        (function () {
+            var SAMPLE = [
+                "| name | role | notes |",
+                "|---|:---:|---:|",
+                "| Zhang San | dev | keeps the 中文 tables readable |",
+                "| Li Si | ops | 2 cells only |",
+                "",
+                "| key | value |",
+                "| --- | --- |",
+                "| a \\| b | escaped pipe stays in one cell |"
+            ].join("\n");
+
+            var form = document.querySelector("#lint-form");
+            var source = document.querySelector("#source");
+            var status = document.querySelector("#status");
+            var summary = document.querySelector("#summary");
+            var issues = document.querySelector("#issues");
+            var output = document.querySelector("#output");
+            var copyButton = document.querySelector("#copy-button");
+
+            if (!form || !source || !status || !summary || !issues || !output || !copyButton) {
+                return;
+            }
+
+            function setStatus(message, state) {
+                status.textContent = message;
+                status.dataset.state = state || "";
+            }
+
+            function clearIssues() {
+                while (issues.firstChild) {
+                    issues.removeChild(issues.firstChild);
+                }
+            }
+
+            function showIssues(list) {
+                clearIssues();
+
+                list.forEach(function (issue) {
+                    var item = document.createElement("li");
+                    var where = document.createElement("span");
+                    var text = document.createElement("span");
+
+                    item.dataset.level = issue.level;
+                    where.className = "where";
+                    where.textContent = "line " + issue.line + ": ";
+                    text.textContent = issue.message;
+
+                    item.appendChild(where);
+                    item.appendChild(text);
+                    issues.appendChild(item);
+                });
+            }
+
+            if (!window.MDTableLint) {
+                setStatus("lint.js did not load, so nothing can be checked.", "error");
+                return;
+            }
+
+            source.value = SAMPLE;
+
+            form.addEventListener("submit", function (event) {
+                event.preventDefault();
+
+                var result = window.MDTableLint.lint(source.value);
+
+                output.textContent = result.output;
+                showIssues(result.issues);
+
+                if (!result.summary.tables) {
+                    summary.textContent = "No Markdown table found. A table needs a header row and a delimiter row such as | --- | --- |.";
+                    setStatus("Nothing to format.", "");
+                    copyButton.disabled = true;
+                    return;
+                }
+
+                var parts = [];
+                parts.push(result.summary.tables + (result.summary.tables === 1 ? " table" : " tables"));
+                parts.push(result.summary.formatted + " reformatted");
+                parts.push(result.summary.errors + " error" + (result.summary.errors === 1 ? "" : "s"));
+                parts.push(result.summary.warnings + " warning" + (result.summary.warnings === 1 ? "" : "s"));
+                summary.textContent = parts.join(" · ");
+
+                if (result.summary.errors || result.summary.warnings) {
+                    var tableWord = result.summary.tables === 1 ? "table" : "tables";
+                    setStatus("Checked " + result.summary.tables + " " + tableWord +
+                        "; problems are listed above.", "error");
+                } else if (result.summary.formatted) {
+                    setStatus("Tables were misaligned; the formatted version is ready to copy.", "success");
+                } else {
+                    setStatus("All tables are valid and already aligned.", "success");
+                }
+
+                copyButton.disabled = false;
+            });
+
+            copyButton.addEventListener("click", function () {
+                var text = output.textContent;
+
+                if (!text) {
+                    return;
+                }
+
+                function fallback() {
+                    var field = document.createElement("textarea");
+                    field.value = text;
+                    field.setAttribute("readonly", "");
+                    field.style.position = "fixed";
+                    field.style.top = "-1000px";
+                    document.body.appendChild(field);
+                    field.select();
+
+                    var copied = false;
+                    try {
+                        copied = document.execCommand("copy");
+                    } catch (error) {
+                        copied = false;
+                    }
+
+                    document.body.removeChild(field);
+
+                    if (copied) {
+                        setStatus("Formatted Markdown copied.", "success");
+                    } else {
+                        setStatus("Copy is unavailable here; select the text in the result box instead.", "");
+                    }
+                }
+
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    navigator.clipboard.writeText(text).then(function () {
+                        setStatus("Formatted Markdown copied.", "success");
+                    }, fallback);
+                } else {
+                    fallback();
+                }
+            });
+        })();
+    </script>
+</body>
+</html>
